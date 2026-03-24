@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>震中2008 · 模拟报道 | 如果汶川地震发生在今天</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f2f4f8;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: #1e293b;
+            padding: 2rem 1rem;
+        }
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            overflow: hidden;
+        }
+        .study-header {
+            background: #0b1120;
+            color: #e2e8f0;
+            padding: 2.5rem 2rem;
+            border-bottom: 1px solid #1e293b;
+        }
+        .study-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .study-header h1 span {
+            background: #b91c1c;
+            color: white;
+            font-size: 1.2rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            vertical-align: middle;
+            margin-left: 1rem;
+            font-weight: 500;
+        }
+        .study-header .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #9ca3af;
+        }
+        .meta i {
+            margin-right: 0.4rem;
+            color: #4f46e5;
+        }
+        .study-header .abstract {
+            margin-top: 1.5rem;
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 6px solid #b91c1c;
+            font-size: 1.1rem;
+            color: #f1f5f9;
+        }
+        .timeline-tag {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e4e4e7;
+            font-weight: 500;
+            color: #334155;
+            cursor: pointer;
+        }
+        .timeline-tag span {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .timeline-tag span:hover {
+            color: #b91c1c;
+        }
+        .timeline-tag .active {
+            color: #b91c1c;
+            border-bottom: 3px solid #b91c1c;
+            padding-bottom: 0.4rem;
+        }
+        .timeline-tag span i {
+            margin-right: 0.3rem;
+            color: #64748b;
+        }
+        .section-title {
+            padding: 2rem 2rem 0.5rem 2rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e4e4e7;
+            margin-bottom: 1rem;
+        }
+        .section-title i {
+            color: #b91c1c;
+            font-size: 2rem;
+        }
+        .card-grid {
+            padding: 0 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .social-card {
+            background: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+        .social-card:hover {
+            box-shadow: 0 16px 30px -10px rgba(0,0,0,0.15);
+        }
+        .live-card-dark {
+            background: #0f172a !important;
+            color: #f1f5f9;
+            border-color: #334155;
+        }
+        .live-card-dark .author-name,
+        .live-card-dark .timestamp,
+        .live-card-dark .card-content,
+        .live-card-dark .stats,
+        .live-card-dark .comment-section,
+        .live-card-dark .comment-name,
+        .live-card-dark .comment-text {
+            color: #f1f5f9;
+        }
+        .live-card-dark .badge.live {
+            background: #b91c1c;
+            color: white;
+        }
+        .live-card-dark .action-btn {
+            background: #1e293b;
+            color: #94a3b8;
+        }
+        .live-card-dark .action-btn:hover {
+            background: #334155;
+        }
+        .live-card-dark .comment-section {
+            background: #1e293b;
+        }
+        .live-card-dark .comment-avatar {
+            background: #475569;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .author-info {
+            flex: 1;
+        }
+        .author-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .author-name i {
+            color: #1d9bf0;
+            font-size: 1rem;
+            margin-left: 0.3rem;
+        }
+        .timestamp {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .badge {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+        .badge.live {
+            background: #fecaca;
+            color: #b91c1c;
+        }
+        .card-content {
+            margin: 1rem 0;
+            font-size: 1.05rem;
+        }
+        .card-content .action-btn {
+            background: #f1f5f9;
+            padding:0.4rem 1.2rem;
+            border-radius:20px;
+            display:inline-block;
+            margin-top:0.8rem;
+            cursor: pointer;
+            color: #2563eb;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .card-content .action-btn:hover {
+            background: #dbeafe;
+        }
+        .card-media {
+            border-radius: 1rem;
+            margin: 1rem 0;
+            overflow: hidden;
+            position: relative;
+            background: #f1f5f9;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-media iframe,
+        .card-media video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: none;
+        }
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 1rem;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+        .social-card:hover .card-media img {
+            transform: scale(1.02);
+        }
+        .danmu-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .danmu {
+            position: absolute;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 0 4px rgba(0,0,0,0.8);
+            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 14px;
+            border-radius: 30px;
+            border-left: 3px solid #b91c1c;
+            backdrop-filter: blur(2px);
+            animation: danmu 15s linear infinite;
+            left: 100%;
+            transform: translateX(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .danmu:nth-child(1) { top: 10%; animation-delay: 0s; }
+        .danmu:nth-child(2) { top: 25%; animation-delay: 2.5s; }
+        .danmu:nth-child(3) { top: 40%; animation-delay: 5s; }
+        .danmu:nth-child(4) { top: 55%; animation-delay: 7.5s; }
+        .danmu:nth-child(5) { top: 70%; animation-delay: 10s; }
+        .danmu:nth-child(6) { top: 18%; animation-delay: 1.5s; }
+        .danmu:nth-child(7) { top: 33%; animation-delay: 3.2s; }
+        .danmu:nth-child(8) { top: 48%; animation-delay: 5.8s; }
+        .danmu:nth-child(9) { top: 62%; animation-delay: 0.8s; }
+        .danmu:nth-child(10) { top: 77%; animation-delay: 4.4s; }
+        .danmu:nth-child(11) { top: 85%; animation-delay: 2.2s; }
+        .danmu:nth-child(12) { top: 45%; animation-delay: 3.0s; }
+        .danmu:nth-child(13) { top: 50%; animation-delay: 6.0s; }
+        .danmu:nth-child(14) { top: 52%; animation-delay: 8.5s; }
+        @keyframes danmu {
+            from { transform: translateX(0); }
+            to { transform: translateX(-350%); }
+        }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .stats i {
+            margin-right: 0.2rem;
+        }
+        .comment-section {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin-top: 1rem;
+        }
+        .comment {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.8rem;
+        }
+        .comment:last-child {
+            border: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .comment-avatar {
+            width: 36px;
+            height: 36px;
+            background: #94a3b8;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .comment-body {
+            flex: 1;
+        }
+        .comment-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .comment-text {
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        .news-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: #0f172a;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            color: #f1f5f9;
+            margin-bottom: 1.5rem;
+        }
+        .news-left {
+            flex: 2;
+            min-width: 280px;
+        }
+        .news-left h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        .news-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: #94a3b8;
+        }
+        .news-right {
+            flex: 1;
+            background: #1e293b;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+        .news-right .pulse {
+            color: #f87171;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .poll-card {
+            background: linear-gradient(145deg, #f1f5f9, #ffffff);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid #d1d9e6;
+        }
+        .poll-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0 1rem;
+        }
+        .poll-option {
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 40px;
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: default;
+            transition: 0.1s;
+            box-shadow: 0 4px 6px -4px #b0b0b0;
+        }
+        .poll-option.selected {
+            background: #b91c1c;
+            border-color: #b91c1c;
+            color: white;
+        }
+        .result-bars {
+            margin: 1.5rem 0;
+        }
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.6rem 0;
+        }
+        .bar-label {
+            width: 40px;
+            font-weight: 600;
+        }
+        .bar-line {
+            flex: 1;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 12px;
+            background: #b91c1c;
+            width: 0%;
+            border-radius: 20px;
+        }
+        .ethics-note {
+            background: #fef9c3;
+            border-left: 8px solid #b45309;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 2rem;
+        }
+        .privacy-module {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin: 0 2rem 2rem;
+            text-align: center;
+        }
+        .privacy-module h4 {
+            font-size: 1.3rem;
+            color: #166534;
+            margin-bottom: 1.5rem;
+        }
+        .privacy-img-wrap {
+            max-width: 400px;
+            margin: 0 auto 1.5rem;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .privacy-img-wrap img {
+            width: 100%;
+            display: block;
+            transition: filter 0.3s ease;
+        }
+        .privacy-img-wrap img.blur {
+            filter: blur(10px);
+        }
+        .privacy-btn {
+            padding: 0.8rem 2rem;
+            background: #166534;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .privacy-btn:hover {
+            background: #15803d;
+        }
+        .privacy-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .privacy-text {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: #166534;
+            display: none;
+        }
+        .hot-box {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.1);
+            border: 1px solid #e9eef2;
+            margin-bottom: 2rem;
+        }
+        .hot-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .hot-header i {
+            color: #e11d48;
+            font-size: 1.8rem;
+        }
+        .hot-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .hot-list {
+            list-style: none;
+        }
+        .hot-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .hot-item:last-child {
+            border-bottom: none;
+        }
+        .hot-rank {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #94a3b8;
+            min-width: 30px;
+        }
+        .hot-rank.top3 {
+            color: #b91c1c;
+        }
+        .hot-content {
+            flex: 1;
+        }
+        .hot-title {
+            font-weight: 600;
+        }
+        .hot-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        .hot-tag {
+            background: #fee2e2;
+            color: #b91c1c;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 2rem;
+            padding: 0 2rem 2rem 2rem;
+        }
+        .main-content {
+            overflow: hidden;
+        }
+        .timeline-sidebar {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .timeline-section {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9eef2;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .timeline-container {
+            position: relative;
+            padding-left: 1.8rem;
+            margin: 0.5rem 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #b91c1c;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.8rem;
+            padding-left: 1.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.6rem;
+            top: 0.4rem;
+            width: 1rem;
+            height: 1rem;
+            background: #b91c1c;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #b91c1c;
+            z-index: 1;
+        }
+        .timeline-item:hover {
+            transform: translateX(4px);
+        }
+        .timeline-time {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #b91c1c;
+            margin-bottom: 0.2rem;
+        }
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: #4b5563;
+            margin-bottom: 0.2rem;
+        }
+        .timeline-tech {
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .timeline-metrics {
+            font-size: 0.75rem;
+            color: #b91c1c;
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+        .timeline-spacer {
+            flex-grow: 1;
+            min-height: 2rem;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 1rem 1rem 1rem;
+            }
+            .timeline-sidebar {
+                order: 2;
+            }
+        }
+        .study-conclusion {
+            background: #f1f4f9;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            margin: 2rem 2rem 0 2rem;
+        }
+        .framework {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .framework-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1.2rem;
+        }
+        .framework-item i {
+            color: #b91c1c;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            background: #0b1120;
+            color: #9ca3af;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+            max-width: 800px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #718096;
+        }
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .doc-table th, .doc-table td {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        .doc-table th {
+            background: #f7fafc;
+        }
+        .donate-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .donate-option {
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .donate-option:hover {
+            border-color: #b91c1c;
+            background: #fef2f2;
+        }
+        .help-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .help-form input, .help-form textarea {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .submit-btn {
+            padding: 12px;
+            background: #b91c1c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        @media (max-width: 768px) {
+            .study-header h1 {
+                font-size: 1.8rem;
+            }
+            .study-header h1 span {
+                display: block;
+                margin: 0.5rem 0 0 0;
+                width: fit-content;
+            }
+            .timeline-tag {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            .donate-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .modal-content {
+                margin: 10% 5%;
+                padding: 20px;
+            }
+            .study-conclusion {
+                margin: 2rem 1rem 0 1rem;
+            }
+            .framework {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="study-header">
+        <h1>震中2008 <span>模拟报道 · 旧闻新议实验</span></h1>
+        <div class="meta">
+            <span><i class="fas fa-calendar-alt"></i> 2008年5月12日 · 实时推演</span>
+            <span><i class="fas fa-map-pin"></i> 汶川县 · 龙门山断裂带</span>
+            <span><i class="fas fa-satellite"></i> 低轨卫星+AI</span>
+        </div>
+        <div class="abstract">
+            <i class="fas fa-quote-left" style="color:#b91c1c; opacity:0.7;"></i> 
+            本模拟假定：2008年5月12日14:28，汶川发生8.0级地震。所有报道、社交动态、公众反应均基于2026的成熟媒介技术（无人机直播、AI预警、AR寻人、互助文档等）。这不是一次纪念，而是一场「现在时」的灾难叙事实验。
+        </div>
+    </div>
+    <div class="timeline-tag">
+        <span class="active" onclick="scrollToCard('pre-warning-card', this)"><i class="fas fa-bolt"></i> 第一分钟·预警</span>
+        <span onclick="scrollToCard('live-drone-card', this)"><i class="fas fa-drone"></i> 30分钟·无人机</span>
+        <span onclick="scrollToCard('safe-mark-card', this)"><i class="fas fa-map-marked-alt"></i> 6小时·报平安</span>
+        <span onclick="scrollToCard('crowd-map-card', this)"><i class="fas fa-chart-line"></i> 24小时·互助文档</span>
+        <span onclick="scrollToCard('ai-search-card', this)"><i class="fas fa-robot"></i> 48小时·AI寻人</span>
+        <span onclick="scrollToCard('ethics-roundtable-card', this)"><i class="fas fa-microphone-alt"></i> 72小时·伦理圆桌</span>
+    </div>
+    <div class="main-layout">
+        <div class="main-content">
+            <div class="section-title"><i class="fas fa-users"></i> 社交媒体 · 实时动态</div>
+            <div class="card-grid">
+                <div class="social-card" id="pre-warning-card">
+                    <div class="card-header">
+                        <div class="avatar" style="background:#0b549e;">🌐</div>
+                        <div class="author-info">
+                            <div class="author-name">中国地震台网 <i class="fas fa-check-circle"></i></div>
+                            <div class="timestamp"><i class="far fa-clock"></i> 14:28:15 · 刚刚</div>
+                        </div>
+                        <span class="badge">官方预警</span>
+                    </div>
+                    <div class="card-content">
+                        <strong>【地震预警】</strong> 自动测定：5月12日14:28四川汶川县（北纬31.0，东经103.4）发生8.0级地震，震源深度14千米。已向震中周边300公里手机用户推送预警，成都、绵阳等地有强烈震感。请保持镇静，就近避险。<br>
+                        <span class="action-btn" onclick="openMapModal()">📍 点击查看实时烈度图</span>
+                    </div>
+                    <div class="card-media">
+                        <img src="https://aka.doubaocdn.com/s/Udux1w5oXD" alt="地震预警弹窗" style="object-fit: contain; background-color: #f1f5f9;">
+                    </div>
+                    <div class="stats">
+                        <span><i class="fas fa-retweet"></i> 1.2万</span>
+                        <span><i class="fas fa-comment"></i> 4.5万</span>
+                        <span><i class="fas fa-heart"></i> 8.7万</span>
+                    </div>
+                    <div class="comment-section">
+                        <div class="comment">
+                            <div class="comment-avatar" style="background:#16a34a;"></div>
+                            <div class="comment-body">
+                                <span class="comment-name">@李同学 <i class="fas fa-map-marker-alt" style="color:red;"></i></span>
+                                <div class="comment-text">在19楼开会，手机突然尖叫“倒计时30秒”，全钻桌底！现在晃得厉害，预警真的救命！</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar" style="background:#ca8a04;"></div>
+                            <div class="comment-body">
+                                <span class="comment-name">@张司机</span>
+                                <div class="comment-text">预警比波先到，跑了！楼道全是人但没乱。希望这次房子结实点……</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar" style="background:#059669;"></div>
+                            <div class="comment-body">
+                                <span class="comment-name">@王老师</span>
+                                <div class="comment-text">学校的预警铃响了，立刻组织孩子们躲到课桌下，还好提前演练过，整个过程只用了10秒，希望灾区的大家都平安。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hot-box">
+                    <div class="hot-header">
+                        <i class="fab fa-weibo"></i>
+                        <h3>微博热搜 · 实时榜</h3>
+                    </div>
+                    <ul class="hot-list">
+                        <li class="hot-item"><span class="hot-rank top3">1</span><div class="hot-content"><div class="hot-title">#汶川地震 无人机直播#</div><div class="hot-meta">爆 2367.4万讨论</div></div><span class="hot-tag">LIVE</span></li>
+                        <li class="hot-item"><span class="hot-rank top3">2</span><div class="hot-content"><div class="hot-title">#成都提前收到预警#</div><div class="hot-meta">热 1892.3万讨论</div></div></li>
+                        <li class="hot-item"><span class="hot-rank top3">3</span><div class="hot-content"><div class="hot-title">#寻亲妈妈 AI匹配成功#</div><div class="hot-meta">沸 1456.8万讨论</div></div><span class="hot-tag">泪目</span></li>
+                        <li class="hot-item"><span class="hot-rank">4</span><div class="hot-content"><div class="hot-title">#无人机投水瞬间#</div><div class="hot-meta">1267.3万讨论</div></div></li>
+                        <li class="hot-item"><span class="hot-rank">5</span><div class="hot-content"><div class="hot-title">#北川互助文档#</div><div class="hot-meta">982.1万讨论</div></li>
+                        <li class="hot-item"><span class="hot-rank">6</span><div class="hot-content"><div class="hot-title">#直播弹幕刷屏保佑#</div><div class="hot-meta">856.4万讨论</div></li>
+                        <li class="hot-item"><span class="hot-rank">7</span><div class="hot-content"><div class="hot-title">#质疑无人机投送精度#</div><div class="hot-meta">672.3万讨论</div></li>
+                        <li class="hot-item"><span class="hot-rank">8</span><div class="hot-content"><div class="hot-title">#应急管理部 民间数据#</div><div class="hot-meta">543.2万讨论</div></li>
+                        <li class="hot-item"><span class="hot-rank">9</span><div class="hot-content"><div class="hot-title">#地震时男朋友紧紧抱着我#</div><div class="hot-meta">432.9万讨论</div></li>
+                        <li class="hot-item"><span class="hot-rank">10</span><div class="hot-content"><div class="hot-title">#AI合成遇难者声音争议#</div><div class="hot-meta">378.6万讨论</div></li>
+                    </ul>
+                </div>
+                <div class="social-card live-card-dark" id="live-drone-card">
+                    <div class="card-header">
+                        <div class="avatar" style="background:#b91c1c;">🚁</div>
+                        <div class="author-info">
+                            <div class="author-name">直播四川 <i class="fas fa-check-circle" style="color:#1d9bf0;"></i></div>
+                            <div class="timestamp"><i class="far fa-clock"></i> 15:00 · 正在直播</div>
+                        </div>
+                        <span class="badge live">LIVE 1258.6w人</span>
+                    </div>
+                    <div class="card-content">
+                        <strong>【直击汶川】</strong> 无人机已飞抵震中映秀镇！第一手画面：房屋倒塌、道路中断、群众聚集。救援无人机正在投送应急物资，空中基站已搭建。<br>
+                        <span class="action-btn" onclick="openVRModal()">🎮 点击进入VR全景看现场</span>
+                        <span class="action-btn" style="margin-left:0.5rem;">👓 AR看现场</span>
+                    </div>
+                    <div class="card-media">
+                        <img src="https://aka.doubaocdn.com/s/RCVp1w7hVn" alt="无人机救援现场">
+                        <div class="danmu-layer">
+                            <div class="danmu">加油！挺住！</div>
+                            <div class="danmu">有没有人看到我妈？</div>
+                            <div class="danmu">感谢救援人员！</div>
+                            <div class="danmu">我在映秀，我还活着！</div>
+                            <div class="danmu">666，无人机太牛了！</div>
+                            <div class="danmu">愿平安！</div>
+                            <div class="danmu">救援队辛苦了</div>
+                            <div class="danmu">一定要活下去</div>
+                            <div class="danmu">注意余震</div>
+                            <div class="danmu">保护好自己</div>
+                            <div class="danmu">希望能平安</div>
+                            <div class="danmu">大家坚持住</div>
+                            <div class="danmu">相信国家</div>
+                            <div class="danmu">祈福汶川</div>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <span><i class="fas fa-eye"></i> 1258.6万人在线</span>
+                        <span><i class="fas fa-location-dot"></i> 收到公众标记 8,234个</span>
+                    </div>
+                    <div class="comment-section">
+                        <div class="comment">
+                            <div class="comment-avatar" style="background:#2563eb;"></div>
+                            <div class="comment-body"><span class="comment-name">@用户7721</span> 看到有人挥手了！快标记位置！</div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar" style="background:#7c3aed;"></div>
+                            <div class="comment-body"><span class="comment-name">@用户8823</span> 我姐就在映秀！电话不通，有没有人看到她？</div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar" style="background:#059669;"></div>
+                            <div class="comment-body"><span class="comment-name">@志愿者小周</span> 【AI已处理】求助信息已经同步给救援队伍了，他们已经往那边去了，别着急！</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-card" id="safe-mark-card">
+                    <div class="card-header">
+                        <div class="avatar" style="background:#059669;">👨‍👩‍👧</div>
+                        <div class="author-info">
+                            <div class="author-name">李明 朋友圈</div>
+                            <div class="timestamp"><i class="far fa-clock"></i> 20:30 · 来自成都</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        刷了一下午救援直播，看到无人机投下物资哭了。我妈在都江堰老屋，刚才用微信的「报平安」功能报了平安，那颗绿点出现在家族群里的时候，全家人都在发红包。感谢科技，感谢所有救援的人。<br>
+                        <span style="color:#2563eb;">#报平安 #科技的温度</span>
+                    </div>
+                    <div class="stats">
+                        <span><i class="fas fa-thumbs-up"></i> 周华、陈静等178人点赞</span>
+                    </div>
+                    <div class="comment-section">
+                        <div class="comment">
+                            <span class="comment-name">周华：</span>我爸妈也在都江堰，现在还在失联，急死了。
+                        </div>
+                        <div class="comment">
+                            <span class="comment-name">李明 回复：</span>会有的，标记功能只要手机有电就能发。
+                        </div>
+                    </div>
+                </div>
+                <div class="social-card" id="crowd-map-card">
+                    <div class="card-header">
+                        <div class="avatar" style="background:#c2410c;">📋</div>
+                        <div class="author-info">
+                            <div class="author-name">志愿者小杨 · 小红书</div>
+                            <div class="timestamp"><i class="far fa-clock"></i> 5月13日 14:30</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <strong>在线求助互助文档</strong> 绿色已获救，黄色待救援，红色失联超48h。指挥部说这份文档帮他们优化了路线。需要更多志愿者核实！私我。<br>
+                        <span class="action-btn" onclick="openDocModal()">📋 点击查看在线求助文档</span>
+                    </div>
+                    <div class="card-media">
+                        <img src="https://aka.doubaocdn.com/s/kpXt1w5oXD" alt="互助文档截图" style="object-fit: contain; background-color: #f1f5f9;">
+                    </div>
+                    <div class="stats"><span>应急管理部 转发 · 感谢民间力量</span></div>
+                </div>
+                <div class="social-card" id="ai-search-card">
+                    <div class="card-header">
+                        <div class="avatar" style="background:#0b549e;">🤖</div>
+                        <div class="author-info">
+                            <div class="author-name">百度AI <i class="fas fa-check-circle"></i></div>
+                            <div class="timestamp">5月13日 14:00</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        【AI寻人】上线「AI跨年龄识别寻人」！上传震前亲友照片，比对医院收治/安置点登记人像（已脱敏）。目前已成功匹配17组家庭。<br>
+                        <span class="action-btn" onclick="openHelpModal()">🔗 点击进入AI寻人入口</span>
+                    </div>
+                    <div class="stats">3.6万转 · 评论区一片“找到了”</div>
+                </div>
+            </div>
+            <div class="section-title"><i class="fas fa-video"></i> 现场直击 · 那些温暖的瞬间</div>
+            <div class="card-grid" style="padding-top:0;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="social-card" style="margin:0;">
+                        <div class="card-header">
+                            <div class="avatar" style="background:#b91c1c;">👶</div>
+                            <div class="author-info">
+                                <div class="author-name">央视新闻</div>
+                                <div class="timestamp">15:40</div>
+                            </div>
+                        </div>
+                        <div class="card-media">
+                            <img src="https://aka.doubaocdn.com/s/2FkA1wEDtG?alice_filename=%25E6%2595%25AC%25E7%25A4%25BC%25E5%25A8%2583%25E5%25A8%2583.JPG" alt="敬礼娃娃郎铮获救现场" style="object-fit: cover;">
+                        </div>
+                        <div class="card-content">
+                            3岁的郎铮，被埋20小时后获救，虚弱的举起右手，向救援战士敬了一个军礼，这一幕，是灾难里最暖的光。
+                        </div>
+                    </div>
+                    <div class="social-card" style="margin:0;">
+                        <div class="card-header">
+                            <div class="avatar" style="background:#16a34a;">🥤</div>
+                            <div class="author-info">
+                                <div class="author-name">澎湃新闻</div>
+                                <div class="timestamp">16:20</div>
+                            </div>
+                        </div>
+                        <div class="card-media">
+                            <img src="https://aka.doubaocdn.com/s/1oC51wEDtG?alice_filename=%25E5%258F%25AF%25E4%25B9%2590%25E7%2594%25B7%25E5%25AD%25A9.JPG" alt="可乐男孩薛枭" style="object-fit: cover;">
+                        </div>
+                        <div class="card-content">
+                            被埋80小时后获救，他笑着对救援人员说“叔叔，我要喝可乐，要冰冻的”，这一句，让所有人看到了绝境里的乐观。
+                        </div>
+                    </div>
+                    <div class="social-card" style="margin:0;">
+                        <div class="card-header">
+                            <div class="avatar" style="background:#1e40af;">📚</div>
+                            <div class="author-info">
+                                <div class="author-name">人民日报</div>
+                                <div class="timestamp">17:00</div>
+                            </div>
+                        </div>
+                        <div class="card-media">
+                            <img src="https://aka.doubaocdn.com/s/6VPV1wEDtG?alice_filename=%25E8%25B0%25AD%25E5%258D%2583%25E7%25A7%28B.JPG" alt="谭千秋老师" style="object-fit: cover;">
+                        </div>
+                        <div class="card-content">
+                            谭千秋老师，用自己的双臂护住4名学生，用生命诠释了师者的担当，他的背影，是灾难里最坚固的墙。
+                        </div>
+                    </div>
+                    <div class="social-card" style="margin:0;">
+                        <div class="card-header">
+                            <div class="avatar" style="background:#f59e0b;">👦</div>
+                            <div class="author-info">
+                                <div class="author-name">新华社</div>
+                                <div class="timestamp">17:30</div>
+                            </div>
+                        </div>
+                        <div class="card-media">
+                            <img src="https://aka.doubaocdn.com/s/z6Ch1wEDtG?alice_filename=%25E6%259E%2597%25E6%25B5%25A9.JPG" alt="小英雄林浩" style="object-fit: cover;">
+                        </div>
+                        <div class="card-content">
+                            9岁的林浩，从废墟里背出两名同学，自己被砸伤，他说“我是班长，我要保护同学”，小小的身躯，撑起了大大的勇气。
+                        </div>
+                    </div>
+                </div>
+                <div class="social-card" style="background: linear-gradient(145deg, #fef2f2, #ffffff); border: 2px solid #fecaca;">
+                    <div class="card-header">
+                        <div class="avatar" style="background:#b91c1c;">❤️</div>
+                        <div class="author-info">
+                            <div class="author-name">腾讯公益 · 紧急募捐</div>
+                            <div class="timestamp">实时更新</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>汶川地震紧急救援募捐</h3>
+                        <div style="margin: 1rem 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span>已筹：7500万元</span>
+                                <span>目标：1亿元</span>
+                            </div>
+                            <div style="width: 100%; height: 12px; background: #e2e8f0; border-radius: 20px; overflow: hidden;">
+                                <div style="width: 75%; height: 100%; background: #b91c1c;"></div>
+                            </div>
+                        </div>
+                        <span class="action-btn" onclick="openDonateModal()">❤️ 一键捐款</span>
+                        <span class="action-btn" style="margin-left: 1rem;">🔗 转发募捐</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-title"><i class="fas fa-tower-broadcast"></i> 新闻深度 · 2008演播室</div>
+            <div class="card-grid" style="padding-top:0;">
+                <div class="news-block" id="cctv-news-block">
+                    <div class="news-left">
+                        <h3><i class="fas fa-tv" style="color:#b91c1c;"></i> 央视新闻 · 特别报道</h3>
+                        <div class="news-meta"><span><i class="far fa-clock"></i> 震后2小时</span><span>全息演播室</span></div>
+                        <p>主持人身后，全息三维地图实时更新。首批12支救援队搭乘运-20起飞，三颗低轨卫星调整轨道，每15分钟扫描一次震区。</p>
+                        <div style="margin-top:1rem;">
+                            <span class="action-btn" onclick="openDonateModal()">❤️ 一键为灾区捐款</span>
+                        </div>
+                    </div>
+                    <div class="news-right">
+                        <i class="fas fa-satellite-dish pulse" style="font-size:2rem; margin-bottom:1rem;"></i>
+                        <span>📡 卫星成像中</span>
+                        <span>🚁 无人机已投送 1.2吨物资</span>
+                        <span>📱 公众标记 8,234 条</span>
+                    </div>
+                </div>
+                <div style="background:white; border-radius:1.5rem; padding:1.8rem; border:2px solid #d9e2ef;">
+                    <h2 style="display:flex; gap:0.5rem;"><i class="fas fa-chart-pie" style="color:#b91c1c;"></i> 澎湃 | 72小时，一张数据图如何改变救援？</h2>
+                    <div style="display:flex; flex-wrap:wrap; gap:2rem; margin:1.5rem 0;">
+                        <div style="flex:2">
+                            <p><strong>数据来源：</strong>卫星形变识别、手机信令热力、社交媒体标记<br>
+                            <strong>AI动态权重：</strong>每个网格生成“救援紧迫度分数”，无人机自动规划投送路线</p>
+                            <div style="background:#e9ecf0; border-radius:1rem; padding:1rem;">
+                                <span>📊 拖动时间轴查看覆盖范围变化：</span><br>
+                                <progress value="70" max="100" style="width:80%; height:8px; border-radius:20px;"></progress> 震后48h覆盖
+                            </div>
+                        </div>
+                        <div style="flex:1; background:#f1f5f9; border-radius:1rem; padding:1rem;">
+                            <span class="badge" style="background:#b91c1c; color:white;">局限与反思</span>
+                            <p style="margin-top:0.5rem; font-size:0.9rem;">盲区：无信号山区全靠卫星；10%误报；公众定位隐私边界在哪？</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: #fef2f2; border-left: 8px solid #b91c1c; border-radius: 1rem; padding: 1.5rem;">
+                    <i class="fas fa-newspaper" style="color:#b91c1c;"></i> <strong style="font-size:1.3rem;">新京报社论</strong> 透明的灾难：我们准备好了吗？<br>
+                    “直播间刷礼物给遇难者画面、AI合成虚假求救声……技术的透明带来了效率，也带来了伦理挑战。灾难报道的黄金准则—‘不造成二次伤害’—我们时刻谨记。”
+                </div>
+            </div>
+            <div class="section-title"><i class="fas fa-newspaper"></i> 正式报道 · 权威声音</div>
+            <div class="card-grid" style="padding-top:0;">
+                <div class="social-card" style="background: #0b1120; color: #f1f5f9;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fas fa-tv" style="font-size: 2rem; color: #b91c1c;"></i>
+                        <span style="font-size: 1.5rem; font-weight: 600;">新闻联播 · 2008年5月12日</span>
+                    </div>
+                    <div style="background: #1e293b; border-radius: 1rem; padding: 1.5rem;">
+                        <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">【口播】观众朋友，晚上好。</p>
+                        <p style="margin-bottom: 0.5rem;">今天是5月12日，星期一，农历四月初八。欢迎收看新闻联播节目。</p>
+                        <p style="margin-bottom: 0.5rem;">首先为您介绍今天节目的主要内容：</p>
+                        <p style="margin-bottom: 0.3rem;">• 胡锦涛主持召开中共中央政治局常委会，部署抗震救灾工作</p>
+                        <p style="margin-bottom: 0.3rem;">• 温家宝抵达四川成都，在专机上发表重要讲话，强调“只要有一线希望，就要尽百倍努力”</p>
+                        <p style="margin-bottom: 0.3rem;">• 解放军和武警部队紧急投入救灾，已救出被困群众近万人</p>
+                        <p style="margin-bottom: 0.3rem;">• 全国各地踊跃捐款捐物，首批救灾物资运抵灾区</p>
+                        <div style="margin-top: 1rem; background: #000; border-radius: 0.5rem; position: relative; overflow: hidden; height: 140px;">
+                            <img src="https://aka.doubaocdn.com/s/zpkQ1w5rzV" alt="新闻联播截图" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; gap: 1rem; align-items: center; color: white;">
+                                <i class="fas fa-play-circle" style="font-size: 2.5rem; color: #b91c1c;"></i>
+                                <span style="font-weight: 600;">点击观看新闻联播片段（模拟）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-card" style="background: #fefcf0; border: 1px solid #d4b48c;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <span style="font-size: 1.8rem; font-weight: 800; color: #b91c1c; font-family: 'Times New Roman', serif;">人民日报</span>
+                        <span style="color: #666; font-size: 0.9rem;">2008年5月13日 星期二</span>
+                    </div>
+                    <div style="border-top: 3px double #b91c1c; border-bottom: 1px solid #b91c1c; padding: 1rem 0; text-align: center;">
+                        <span style="font-size: 2.2rem; font-weight: 900; color: #1e293b;">胡锦涛作出重要指示</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <p style="font-weight: 700; font-size: 1.2rem;">温家宝抵达灾区指挥救援</p>
+                            <p style="color: #4b5563; font-size: 0.95rem;">“只要有一线希望，就要尽百倍努力”</p>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center; height: 300px;">
+                            <img src="https://aka.doubaocdn.com/s/eHUc1w5ryh" alt="人民日报头版" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px; background-color: #fefcf0;">
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #d4b48c;">
+                        <p style="font-size: 0.95rem; color: #4b5563;">截至13日20时，已有近2万名解放军和武警官兵到达灾区展开救援</p>
+                    </div>
+                </div>
+                <div class="social-card" style="border-left: 8px solid #b91c1c;">
+                    <div style="display: flex; gap: 1rem;">
+                        <span style="background: #b91c1c; color: white; padding: 0.2rem 1rem; border-radius: 20px; font-size: 0.9rem;">深度特写</span>
+                        <span style="color: #64748b;">南方周末 · 2008年5月15日</span>
+                    </div>
+                    <h3 style="font-size: 1.8rem; margin: 1rem 0;">“我听见她在喊我”</h3>
+                    <p style="color: #4b5563; font-style: italic;">——一对母女在废墟下的生死对话</p>
+                    <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                        <div style="flex: 1;">
+                            <p>5月13日凌晨，北川县城废墟下，救援队员听到了微弱的声音。循声挖掘6小时后，他们发现了51岁的母亲和23岁的女儿。两人被同一根横梁压住，相距不到两米。</p>
+                            <p style="margin-top: 0.5rem;">“她一直在喊我的名字，喊了一夜。”获救后，女儿对记者说，“我告诉她，妈你别睡，天快亮了。”</p>
+                        </div>
+                        <img src="https://aka.doubaocdn.com/s/O3To1w5rzY" alt="北川救援现场" style="flex: 0 0 120px; width: 120px; height: 140px; object-fit: contain; background-color: #f1f5f9; border-radius: 4px;">
+                    </div>
+                    <div style="border-top: 1px solid #e2e8f0; padding-top: 1rem; color: #2563eb; cursor: pointer;">
+                        <i class="fas fa-arrow-right"></i> 阅读全文（模拟）
+                    </div>
+                </div>
+                <div class="social-card" id="wenhuibao-card" style="background: #fefcf0; border: 1px solid #d4b48c;">
+                    <div class="card-header">
+                        <div class="avatar" style="background:#2563eb;">🌍</div>
+                        <div class="author-info">
+                            <div class="author-name">文汇报 · 国际综述</div>
+                            <div class="timestamp">2008年5月15日</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="font-size:1.3rem; margin-bottom:0.8rem; color:#1e293b;">外国媒体高度评价中国政府抗震救灾应急响应迅速</h3>
+                        <p style="margin-bottom:0.5rem;"><strong>美联社</strong>报道说，当灾难来临时，中国领导人迅速发出了表示关切和采取行动的信息，国家主席胡锦涛指示要“想尽一切办法”救助灾区群众，国务院总理温家宝飞往四川省指挥救援工作。</p>
+                        <p style="margin-bottom:0.5rem;"><strong>法新社</strong>连续大量报道，称胡锦涛在地震后迅速主持召开会议部署救灾工作，将救援工作作为政府压倒一切的首要任务。</p>
+                        <p style="margin-bottom:0.5rem;"><strong>英国《泰晤士报》</strong>发表文章高度评价中国政府的救灾工作和开放态度，相信中国有能力应对灾难。</p>
+                        <p style="margin-bottom:0.5rem;"><strong>西班牙《阿贝赛报》《世界报》《国家报》</strong>大幅描述灾情和抗震救灾进展，社论称中国政府反应迅速，温家宝总理当晚赶到都江堰通宵指挥。</p>
+                        <p style="color:#4b5563; font-size:0.95rem; border-top:1px dashed #d4b48c; padding-top:0.5rem;">综合文汇报2008年5月15日国际版</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-title"><i class="fas fa-users"></i> 公众参与 · 伦理互动</div>
+            <div class="card-grid">
+                <div class="social-card" style="background:#f8fafc;">
+                    <h3><i class="fas fa-comments"></i> 评论区 · 众声</h3>
+                    <div class="comment"><span class="comment-name">@北川姑娘</span> 我就是在北川长大的。看到无人机飞过那片废墟，眼泪没停过，但救援比我想象的快得多。</div>
+                    <div class="comment"><span class="comment-name">@理性思考者</span> AI预测伤亡分布图……以后要被算法“标记”命运？</div>
+                    <div class="comment"><span class="comment-name">@伦理课代表</span> 某直播间拍到遇难者遗体还喊“感谢火箭”，举报了！</div>
+                    <div class="comment"><span class="comment-name">@寻亲妈妈</span> 我儿子失联30h，AI寻人还没匹配上，求大家帮我转发。</div>
+                </div>
+                <div class="poll-card">
+                    <h4><i class="fas fa-balance-scale"></i> 你会怎么做？</h4>
+                    <p>场景：你在刷短视频时，看到直播间正在直播废墟救援，主播说“所有礼物都会捐给灾区”，但账号并非官方认证。</p>
+                    <div class="poll-options">
+                        <span class="poll-option">A. 刷个礼物</span>
+                        <span class="poll-option selected">B. 举报</span>
+                        <span class="poll-option">C. 朋友圈提醒</span>
+                        <span class="poll-option">D. 官方渠道捐款</span>
+                    </div>
+                    <div class="result-bars">
+                        <div class="bar-item"><span class="bar-label">A</span><div class="bar-line"><div class="bar-fill" style="width:12%"></div></div>12%</div>
+                        <div class="bar-item"><span class="bar-label">B</span><div class="bar-line"><div class="bar-fill" style="width:34%"></div></div>34%</div>
+                        <div class="bar-item"><span class="bar-label">C</span><div class="bar-line"><div class="bar-fill" style="width:21%"></div></div>21%</div>
+                        <div class="bar-item"><span class="bar-label">D</span><div class="bar-line"><div class="bar-fill" style="width:33%"></div></div>33%</div>
+                    </div>
+                    <p style="color:#4b5563; font-style:italic;">*实时统计数据，截至5.13 20:00</p>
+                </div>
+                <div class="ethics-note" id="ethics-roundtable-card">
+                    <i class="fas fa-hand" style="font-size:2rem; float:right;"></i>
+                    <h4>🧠 技术伦理圆桌 · 模拟对话</h4>
+                    <p><strong>AI合成遇难者声音？</strong> 家属慰藉 vs 人格权保护 —— 尚无共识。</p>
+                    <p><strong>无人机拍到隐私画面？</strong> 平台紧急打码，但截图已流传。建议设立灾难镜头伦理指南。</p>
+                    <p><strong>公众标记求救责任？</strong> 信用机制+AI交叉验证，但人工核实依然必要。</p>
+                </div>
+            </div>
+            <div class="privacy-module">
+                <h4>【數位倫理】</h4>
+                <div class="privacy-img-wrap">
+                    <img id="privacyImg" src="https://aka.doubaocdn.com/s/VVVf1w5q8X" alt="救援现场照片">
+                </div>
+                <button id="privacyBtn" class="privacy-btn" onclick="togglePrivacyBlur()">
+                    开启隐私模糊
+                </button>
+                <div id="privacyText" class="privacy-text">
+                    守護災民隱私，是2026 年新聞人的底線。
+                </div>
+            </div>
+        </div>
+        <div class="timeline-sidebar">
+            <div class="timeline-section">
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:28:00</div>
+                        <div class="timeline-title">地震发生 · 秒级响应启动</div>
+                        <div class="timeline-desc">汶川发生8.0级地震，震源深度14千米。中国地震预警网触发，预警系统自动启动。</div>
+                        <div class="timeline-tech">技术：地震波自动识别 / 边缘计算</div>
+                        <div class="timeline-metrics">📊 预警网覆盖13省，潜在影响人口3.2亿</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:28:03</div>
+                        <div class="timeline-title">紧急预警推送</div>
+                        <div class="timeline-desc">成都、西安、兰州等地手机用户收到倒计时预警弹窗，民众就近避险。</div>
+                        <div class="timeline-tech">技术：中国地震预警网 / 系统级推送</div>
+                        <div class="timeline-metrics">📊 触达用户2,800万，平均提前68秒预警</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:28:10</div>
+                        <div class="timeline-title">手机自动记录 · 第一现场素材上传</div>
+                        <div class="timeline-desc">震区手机检测到剧烈摇晃，触发“紧急拍摄”并自动上传至云端。</div>
+                        <div class="timeline-tech">技术：传感器触发 / 边缘计算 / 自动上传</div>
+                        <div class="timeline-metrics">📊 12万条现场视频上传，AI自动分类标记</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:28:30</div>
+                        <div class="timeline-title">首条现场视频发布</div>
+                        <div class="timeline-desc">抖音用户发布吊灯摇晃视频，秒级触达全网。</div>
+                        <div class="timeline-tech">技术：短视频极速分发 / AI内容审核</div>
+                        <div class="timeline-metrics">📊 5分钟播放量破千万，话题#汶川地震 登上热搜</div>
+                    </div>
+                    <div class="timeline-item" data-target="pre-warning-card">
+                        <div class="timeline-time">14:31:00</div>
+                        <div class="timeline-title">官方确认速报</div>
+                        <div class="timeline-desc">中国地震台网速报微博自动发布：四川汶川发生6.0级左右地震（后续修正为8.0级）。</div>
+                        <div class="timeline-tech">技术：自动化信息发布 / 实时修正</div>
+                        <div class="timeline-metrics">📊 3分钟转发超10万次，微博热搜第一</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:40:00</div>
+                        <div class="timeline-title">卫星通信求救</div>
+                        <div class="timeline-desc">地面通信拥堵，支持卫星通信的手机用户成功发出求救信息，定位精准。</div>
+                        <div class="timeline-tech">技术：卫星通信直连 / 紧急呼叫优先</div>
+                        <div class="timeline-metrics">📊 1.2万条求救信息成功发出，标记位置同步救援指挥中心</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">15:00:00</div>
+                        <div class="timeline-title">无人机集群起飞</div>
+                        <div class="timeline-desc">首批媒体与救援无人机从成都起飞，奔赴灾区进行灾情评估。</div>
+                        <div class="timeline-tech">技术：无人机集群作业 / AI航线规划</div>
+                        <div class="timeline-metrics">📊 47架次无人机升空，空中基站搭建中</div>
+                    </div>
+                    <div class="timeline-item" data-target="live-drone-card">
+                        <div class="timeline-time">15:30:00</div>
+                        <div class="timeline-title">无人机直播接入 · 第一现场画面</div>
+                        <div class="timeline-desc">直播四川无人机率先传回映秀镇废墟画面，网友弹幕刷屏祈福。</div>
+                        <div class="timeline-tech">技术：5G实时回传 / 多机位切换</div>
+                        <div class="timeline-metrics">📊 直播观看人数突破1258万，公众标记位置8,234个</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">16:30:00</div>
+                        <div class="timeline-title">AI合成主播上线</div>
+                        <div class="timeline-desc">AI合成主播24小时不间断播报快讯，各平台推送个性化避险信息。</div>
+                        <div class="timeline-tech">技术：AI生成内容(AIGC) / 多语言适配</div>
+                        <div class="timeline-metrics">📊 触达用户1.6亿，应急指南播放量2.3亿次</div>
+                    </div>
+                    <div class="timeline-item" data-target="safe-mark-card">
+                        <div class="timeline-time">20:30:00</div>
+                        <div class="timeline-title">微信报平安功能上线</div>
+                        <div class="timeline-desc">用户可一键标记平安，绿点点亮家族群。</div>
+                        <div class="timeline-tech">技术：社交平台应急响应 / 亲友圈标记</div>
+                        <div class="timeline-metrics">📊 178万次平安标记，缓解亲友焦虑</div>
+                    </div>
+                    <div class="timeline-item" data-target="ai-search-card">
+                        <div class="timeline-time">5月13日 14:00</div>
+                        <div class="timeline-title">AI寻人上线</div>
+                        <div class="timeline-desc">AI跨年龄识别寻人功能上线，匹配失联人员照片。</div>
+                        <div class="timeline-tech">技术：人脸识别 / 跨年龄算法</div>
+                        <div class="timeline-metrics">📊 成功匹配17组家庭，帮助寻亲</div>
+                    </div>
+                    <div class="timeline-item" data-target="crowd-map-card">
+                        <div class="timeline-time">5月13日 14:30</div>
+                        <div class="timeline-title">互助文档发布 · 众包救援</div>
+                        <div class="timeline-desc">网友自发整理求助信息，应急管理部转发并同步数据。</div>
+                        <div class="timeline-tech">技术：在线文档协作 / AI信息去重</div>
+                        <div class="timeline-metrics">📊 2,346条求助被核实，优化救援路线37处</div>
+                    </div>
+                    <div class="timeline-item" data-target="cctv-news-block">
+                        <div class="timeline-time">5月13日 20:00</div>
+                        <div class="timeline-title">央视新闻特别报道</div>
+                        <div class="timeline-desc">全息演播室连线灾区，解析震区三维地图。</div>
+                        <div class="timeline-tech">技术：全息投影 / 低轨卫星影像</div>
+                        <div class="timeline-metrics">📊 收视份额达38%，同步观看人数破亿</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月13日 凌晨</div>
+                        <div class="timeline-title">共情疲劳初现</div>
+                        <div class="timeline-desc">连续刷屏引发回避心理，部分用户关闭推送，情感出现极化现象。</div>
+                        <div class="timeline-tech">技术：社交媒体情绪分析 / 用户行为监测</div>
+                        <div class="timeline-metrics">📊 退出率上升12%，话题讨论量下降23%</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月13日 上午</div>
+                        <div class="timeline-title">信息透明化加速</div>
+                        <div class="timeline-desc">领导人行程官方实时图文直播，阻断不实猜测。伤亡数字每小时更新。</div>
+                        <div class="timeline-tech">技术：官方信息平台 / 实时数据同步</div>
+                        <div class="timeline-metrics">📊 谣言识别率提升87%，官方账号增粉320万</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月13日 第二天</div>
+                        <div class="timeline-title">核实与极化并存</div>
+                        <div class="timeline-desc">志愿者团队与平台协同核实求助信息，同时观点阵营分化加剧。</div>
+                        <div class="timeline-tech">技术：众包核实 / 算法推荐分化</div>
+                        <div class="timeline-metrics">📊 互助文档新增2,346条，被不同观点用户标记的争议内容增加</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月13日 全天</div>
+                        <div class="timeline-title">救援进展 · 数据新闻</div>
+                        <div class="timeline-desc">可视化图表每小时更新，动态展示被救人数与物资分布。</div>
+                        <div class="timeline-tech">技术：数据可视化 / 卫星影像叠加</div>
+                        <div class="timeline-metrics">📊 澎湃数据专题访问量破800万，转发率37%</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月14日 黄金72小时</div>
+                        <div class="timeline-title">黄金72小时救援攻坚</div>
+                        <div class="timeline-desc">救援力量全面展开，生命探测仪与搜救犬协同作业，奇迹频现。</div>
+                        <div class="timeline-tech">技术：雷达生命探测仪 / 无人机热成像</div>
+                        <div class="timeline-metrics">📊 72小时内救出被困群众1.2万人，直播观看峰值破2000万</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月14日 全天</div>
+                        <div class="timeline-title">媒体报道媒介迭代</div>
+                        <div class="timeline-desc">传统媒体与自媒体深度融合，VR新闻、AI主播全面应用。</div>
+                        <div class="timeline-tech">技术：VR全景新闻 / AI虚拟主播</div>
+                        <div class="timeline-metrics">📊 沉浸式报道体验用户超3000万，人均停留时长增加4倍</div>
+                    </div>
+                    <div class="timeline-item" data-target="ethics-roundtable-card">
+                        <div class="timeline-time">5月14日 全天</div>
+                        <div class="timeline-title">AI伦理挑战爆发</div>
+                        <div class="timeline-desc">平台标注“疑似AI生成内容”，识别合成虚假视频，引发伦理讨论。</div>
+                        <div class="timeline-tech">技术：AI内容审核 / 深度伪造检测</div>
+                        <div class="timeline-metrics">📊 累计识别虚假视频1,200条，伦理圆桌话题讨论量激增</div>
+                    </div>
+                    <div class="timeline-item" data-target="wenhuibao-card">
+                        <div class="timeline-time">5月15日</div>
+                        <div class="timeline-title">国际媒体高度评价</div>
+                        <div class="timeline-desc">美联社、泰晤士报等盛赞中国政府应急响应速度与信息透明度。</div>
+                        <div class="timeline-tech">技术：国际舆情监测 / 多语种报道</div>
+                        <div class="timeline-metrics">📊 全球1700家媒体转载，外交部感谢国际关注</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月15日 起</div>
+                        <div class="timeline-title">国际传播 · 跨文化视角</div>
+                        <div class="timeline-desc">TikTok上，海外用户通过幸存者第一视角视频了解灾情，形成文化共鸣。</div>
+                        <div class="timeline-tech">技术：多语言字幕 / 跨平台分发</div>
+                        <div class="timeline-metrics">📊 相关视频海外播放量2.1亿次，正面评论占比89%</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月16日 全天</div>
+                        <div class="timeline-title">算法分化显现</div>
+                        <div class="timeline-desc">“过滤气泡”效应凸显，部分用户被推送阴谋论，平台紧急干预。</div>
+                        <div class="timeline-tech">技术：算法优化 / 人工辟谣</div>
+                        <div class="timeline-metrics">📊 涉谣言推送量下降76%，用户信任度回升9%</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月19日 全国哀悼日</div>
+                        <div class="timeline-title">平台协同 · 全媒体哀悼</div>
+                        <div class="timeline-desc">全平台推送哀悼公告，开屏页变黑白，暂停直播打赏。</div>
+                        <div class="timeline-tech">技术：平台协同机制 / 数字哀悼技术</div>
+                        <div class="timeline-metrics">📊 哀悼期间直播收入归零，用户哀悼留言超2.3亿条</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">5月19日 哀悼仪式</div>
+                        <div class="timeline-title">数字哀悼 · 指尖追思</div>
+                        <div class="timeline-desc">上线“点亮蜡烛”特效，头像自动添加祈福标识，无传统报纸头版。</div>
+                        <div class="timeline-tech">技术：AR特效 / 社交头像挂件</div>
+                        <div class="timeline-metrics">📊 点亮蜡烛特效使用超1.5亿次，数字原住民完成集体哀悼</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">一周后</div>
+                        <div class="timeline-title">哀悼与生态反思</div>
+                        <div class="timeline-desc">灾后重建启动，公众开始反思媒介生态与应急体系。</div>
+                        <div class="timeline-tech">技术：公共讨论平台 / 专家直播</div>
+                        <div class="timeline-metrics">📊 相关学术论文预印本发布超300篇，知乎讨论热度持续一周</div>
+                    </div>
+                    <div class="timeline-spacer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="study-conclusion">
+        <div class="section-title" style="border-bottom: none; padding-bottom: 0;"><i class="fas fa-microscope"></i> 研究发现 · 媒介变迁三维度</div>
+        <div class="framework">
+            <div class="framework-item"><i class="fas fa-satellite"></i> <strong>信源</strong><br>从记者、官方 → 万物皆媒</div>
+            <div class="framework-item"><i class="fas fa-dice-d6"></i> <strong>叙事</strong><br>从线性时间轴 → 空间化、可进入、可交互</div>
+            <div class="framework-item"><i class="fas fa-hand-peace"></i> <strong>参与</strong><br>从捐款祈福 → 标记、核实、共情介入</div>
+            <div class="framework-item"><i class="fas fa-exclamation-triangle"></i> <strong>伦理滞后</strong><br>技术快于规范，透明与隐私、真实与模拟持续博弈</div>
+        </div>
+    </div>
+    <footer>
+        《震中2008》— 旧闻新议实验 · 仅作模拟呈现 · 致敬每一份守望相助的力量<br>
+        <span style="font-size:0.8rem;">板块按叙事逻辑排列：时间轴 → 即时报道 → 感人瞬间 → 深度分析 → 权威确认 → 伦理反思 → 研究发现</span>
+    </footer>
+</div>
+<div id="mapModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('mapModal')">&times;</span>
+        <h2>AI实时灾情地图</h2>
+        <img src="https://aka.doubaocdn.com/s/kpXt1w5oXD" alt="灾情地图" style="width: 100%; border-radius: 8px; margin-top:15px;">
+        <p style="text-align: center; margin-top: 15px; color:#64748b;">绿色：已覆盖，黄色：待救援，红色：失联</p>
+    </div>
+</div>
+<div id="vrModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('vrModal')">&times;</span>
+        <h2>VR全景看映秀现场</h2>
+        <img src="https://aka.doubaocdn.com/s/0wuE1w5oB5" alt="VR全景" style="width: 100%; border-radius: 8px; margin-top:15px;">
+        <p style="text-align: center; margin-top: 15px; color:#64748b;">拖动图片查看360°全景</p>
+    </div>
+</div>
+<div id="docModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('docModal')">&times;</span>
+        <h2>汶川地震在线求助文档</h2>
+        <p>网友自发整理的求助信息，已同步给救援队伍，实时更新中</p>
+        <table class="doc-table">
+            <thead> <th>姓名</th><th>位置</th><th>人数</th><th>伤情</th><th>状态</th> </thead>
+            <tbody>
+                 <tr><td>夏XX父母</td><td>映秀镇XX村</td><td>2</td><td>无</td><td>已联系</td></tr>
+                 <tr><td>王XX</td><td>映秀镇XX社区</td><td>1</td><td>腿部受伤</td><td>救援中</td></tr>
+                 <tr><td>张XX一家</td><td>漩口镇XX村</td><td>4</td><td>无</td><td>已救援</td></tr>
+                 <tr><td>李XX</td><td>银杏乡XX村</td><td>3</td><td>老人轻微受伤</td><td>已救援</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="donateModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('donateModal')">&times;</span>
+        <h2>汶川地震紧急募捐</h2>
+        <p>所有善款将全部用于灾区救援与重建，公开透明可查</p>
+        <div class="donate-options">
+            <div class="donate-option">10元</div>
+            <div class="donate-option">50元</div>
+            <div class="donate-option">100元</div>
+            <div class="donate-option">200元</div>
+            <div class="donate-option">500元</div>
+            <div class="donate-option">自定义</div>
+        </div>
+        <button class="submit-btn">确认捐款</button>
+    </div>
+</div>
+<div id="helpModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('helpModal')">&times;</span>
+        <h2>AI寻人 · 提交求助信息</h2>
+        <p>填写你的信息，AI会自动同步给救援队伍</p>
+        <form class="help-form">
+            <input type="text" placeholder="你的姓名">
+            <input type="text" placeholder="联系电话">
+            <input type="text" placeholder="所在位置">
+            <textarea placeholder="具体情况，比如人数、伤情等"></textarea>
+            <button class="submit-btn">提交求助</button>
+        </form>
+    </div>
+</div>
+<script>
+    function togglePrivacyBlur() {
+        const img = document.getElementById('privacyImg');
+        const btn = document.getElementById('privacyBtn');
+        const text = document.getElementById('privacyText');
+        if (img) img.classList.add('blur');
+        if (btn) btn.disabled = true;
+        if (btn) btn.textContent = '已开启隐私模糊';
+        if (text) text.style.display = 'block';
+    }
+    function openMapModal() { const modal = document.getElementById('mapModal'); if(modal) modal.style.display = 'block'; }
+    function openVRModal() { const modal = document.getElementById('vrModal'); if(modal) modal.style.display = 'block'; }
+    function openDocModal() { const modal = document.getElementById('docModal'); if(modal) modal.style.display = 'block'; }
+    function openDonateModal() { const modal = document.getElementById('donateModal'); if(modal) modal.style.display = 'block'; }
+    function openHelpModal() { const modal = document.getElementById('helpModal'); if(modal) modal.style.display = 'block'; }
+    function closeModal(id) { const modal = document.getElementById(id); if(modal) modal.style.display = 'none'; }
+    window.onclick = function(event) {
+        if (event.target.className === 'modal') {
+            event.target.style.display = 'none';
+        }
+    }
+    function scrollToCard(cardId, element) {
+        const card = document.getElementById(cardId);
+        if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        const timelineSpans = document.querySelectorAll('.timeline-tag span');
+        timelineSpans.forEach(span => span.classList.remove('active'));
+        if (element) element.classList.add('active');
+    }
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        const targetId = item.getAttribute('data-target');
+        if (targetId) {
+            item.addEventListener('click', () => {
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
