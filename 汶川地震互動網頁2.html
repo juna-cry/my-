@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>突发：四川汶川发生8.0级地震 | 2026·全景直播</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0a0c12;
+            font-family: 'Segoe UI', 'Roboto', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            color: #eef2ff;
+            line-height: 1.45;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1f2a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff4d4d;
+            border-radius: 8px;
+        }
+        .app-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px 40px 20;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 16px 0 12px;
+            border-bottom: 1px solid #2a2c38;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brand-logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #fff, #ffb347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .live-badge {
+            background-color: #e11d1d;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 6px rgba(225,29,29,0.6);
+        }
+        .live-badge i {
+            font-size: 0.7rem;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%{opacity:1;}50%{opacity:0.5;}100%{opacity:1;}
+        }
+        .timestamp {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            font-family: monospace;
+        }
+        .ticker {
+            background: #14161f;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            color: #ffd966;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .ticker i {
+            color: #ff5e5e;
+        }
+        .breaking-scroll {
+            background: #000000aa;
+            backdrop-filter: blur(10px);
+            margin: 16px 0 20px;
+            padding: 10px 16px;
+            border-radius: 48px;
+            border-left: 5px solid #ff3333;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .quake-data {
+            background: linear-gradient(145deg, #11131e, #0b0d14);
+            border-radius: 32px;
+            padding: 24px;
+            margin: 20px 0;
+            border: 1px solid #2d2f3a;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+        }
+        .magnitude {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #ff6b4a;
+        }
+        .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0 18px;
+            border-top: 1px solid #292c38;
+            padding-top: 20px;
+        }
+        .meta-item {
+            flex: 1;
+            min-width: 130px;
+        }
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #8b92b0;
+            letter-spacing: 1px;
+        }
+        .meta-value {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .timeline-mini {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 20px 0 0;
+            font-size: 0.85rem;
+            background: #0a0c14;
+            padding: 14px 18px;
+            border-radius: 28px;
+        }
+        .timeline-mini span {
+            color: #b9c3e6;
+        }
+        .timeline-mini strong {
+            color: #ffb347;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 28px 0;
+        }
+        @media (max-width: 780px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card {
+            background: #10121c;
+            border-radius: 28px;
+            border: 1px solid #282c3a;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 18px 22px 8px 22px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #262a36;
+        }
+        .card-header i {
+            color: #ff7b4a;
+            font-size: 1.3rem;
+        }
+        .card-content {
+            padding: 18px 22px 22px;
+        }
+        .satellite-img {
+            background: #1b1e2a;
+            border-radius: 20px;
+            padding: 12px;
+            text-align: center;
+        }
+        .img-placeholder {
+            background: #232634;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        .img-placeholder img {
+            width: 100%;
+            display: block;
+        }
+        .badge-tech {
+            background: #2c2f3f;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-top: 12px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 12px;
+        }
+        .video-card {
+            background: #1a1c28;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .video-thumb {
+            height: 110px;
+            position: relative;
+            overflow: hidden;
+        }
+        .video-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-thumb i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #ff9070;
+            z-index: 2;
+        }
+        .video-caption {
+            padding: 10px 12px;
+            font-size: 0.75rem;
+            background: #0e101a;
+        }
+        .tech-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .tech-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .tech-icon {
+            width: 36px;
+            height: 36px;
+            background: #23283a;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .help-row {
+            background: #0e111b;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+        .rumor-box {
+            background: #1a1c2c;
+            border-left: 4px solid #ffaa44;
+            padding: 14px;
+            border-radius: 20px;
+            margin-top: 12px;
+        }
+        .bottom-nav {
+            position: sticky;
+            bottom: 16px;
+            background: #0f111ccc;
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 20px;
+            margin-top: 40px;
+            border: 1px solid #2e3345;
+        }
+        .nav-item {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #b9c3e6;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-item:hover {
+            color: #ff6b4a;
+        }
+        .nav-item i {
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .nav-active {
+            color: #ff6b4a;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5f6a8a;
+            margin-top: 30px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        hr {
+            border-color: #2a2e3c;
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        .form-group {margin-bottom:16px;}
+        label {display:block;margin-bottom:6px;font-size:0.9rem;}
+        input, textarea, select {width:100%;padding:12px;background:#1b1e2a;border:1px solid #282c3a;border-radius:12px;color:#fff;font-size:1rem;}
+        .submit-btn {width:100%;padding:14px;background:#ff6b4a;border:none;border-radius:12px;color:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;}
+        .options-row {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+        .option-btn {padding:12px;background:#1b1e2a;border:1px solid #282c3a;border-radius:12px;text-align:center;cursor:pointer;}
+        .option-btn:hover {border-color:#ff6b4a;}
+        .stats-grid {display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+        .stat-card {background:#1b1e2a;border-radius:20px;padding:16px;}
+        .stat-title {font-size:0.8rem;color:#9ca3af;margin-bottom:6px;}
+        .stat-title i {color:#ff6b4a;margin-right:6px;}
+        .stat-value {font-size:1.8rem;font-weight:700;color:#ff6b4a;}
+        .progress-bar {width:100%;height:10px;background:#0e101a;border-radius:20px;overflow:hidden;margin-top:8px;}
+        .progress-fill {height:100%;background:#ff6b4a;}
+        .list-item {display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #282c3a;}
+        .list-item i {color:#ff6b4a;margin-right:8px;}
+        .rumor-item {background:#1b1e2a;border-radius:20px;padding:16px;margin-bottom:12px;border-left:4px solid #ffaa44;}
+        .rumor-title {font-weight:700;margin-bottom:6px;}
+        .rumor-fact {color:#44aa44;font-size:0.9rem;}
+        .report-btn {padding:8px 16px;background:#ff6b4a;border:none;border-radius:20px;color:#fff;font-size:0.8rem;cursor:pointer;float:right;}
+        .legend {display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;}
+        .legend-item {display:flex;align-items:center;gap:6px;font-size:0.8rem;}
+        .legend-dot {width:12px;height:12px;border-radius:50%;}
+        .dot-red {background:#ff4d4d;}
+        .dot-yellow {background:#ffaa44;}
+        .dot-green {background:#44aa44;}
+        .dot-blue {background:#4488ff;}
+        .stats-row {display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px;}
+        .stat-item {background:#0e101a;border-radius:20px;padding:12px;text-align:center;}
+        .stat-value {font-size:1.5rem;font-weight:700;color:#ff6b4a;}
+        .stat-label {font-size:0.8rem;color:#9ca3af;}
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="top-bar">
+        <div class="brand">
+            <div class="brand-logo"><i class="fas fa-satellite-dish"></i> 前沿·融媒</div>
+            <div class="live-badge"><i class="fas fa-circle"></i> LIVE · 全景直播</div>
+        </div>
+        <div class="timestamp" id="liveTime"><i class="far fa-clock"></i> 2026.05.12 14:46:22 (UTC+8) · 震后18分钟</div>
+        <div class="ticker"><i class="fas fa-wave-square"></i> 国家地震台网自动测定 | 权威发布</div>
+    </div>
+    <div class="breaking-scroll">
+        <i class="fas fa-bullhorn"></i>
+        <span id="breakingText">【急讯】国务院启动国家地震一级应急响应 · 中国国际救援队已携生命探测仪乘运-20起飞 · 高分七号、海丝一号卫星紧急成像中 · 震中通信全阻，无人机蜂群携基站已从彭州起飞</span>
+    </div>
+
+    <!-- 直播页面（默认显示） -->
+    <div class="page-section active" id="page-live">
+        <div class="quake-data">
+            <div class="magnitude">M 8.0</div>
+            <div style="font-size: 1rem; color:#ccc;">强烈地震 · 浅源型 · 极浅源破裂</div>
+            <div class="meta-row">
+                <div class="meta-item"><div class="meta-label">震源深度</div><div class="meta-value">14 km</div></div>
+                <div class="meta-item"><div class="meta-label">震中位置</div><div class="meta-value">北纬31.0° 东经103.4°<br>汶川县 · 阿坝州</div></div>
+                <div class="meta-item"><div class="meta-label">距成都市区</div><div class="meta-value">约80 km</div></div>
+                <div class="meta-item"><div class="meta-label">最大烈度</div><div class="meta-value">Ⅺ度 (极重灾区)</div></div>
+            </div>
+            <div class="timeline-mini">
+                <span><i class="fas fa-hourglass-start"></i> 14:28:04 地震发生</span>
+                <span><i class="fas fa-bell"></i> 14:28:19 <strong>预警倒计时</strong> 成都、绵阳提前14秒警报</span>
+                <span><i class="fas fa-satellite"></i> 14:28:40 自动速报全网推送</span>
+                <span><i class="fas fa-chart-bar"></i> 14:35 <strong>一级响应启动</strong></span>
+                <span><i class="fas fa-microchip"></i> 14:42 高分卫星紧急任务注入</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-globe-asia"></i> 天基侦察 · 实时灾情研判</div>
+            <div class="card-content">
+                <div class="satellite-img">
+                    <div class="img-placeholder">
+                        <img src="https://aka.doubaocdn.com/s/8aVQ1w7hgt" alt="北川震后卫星俯视图">
+                    </div>
+                    <div style="margin-top: 12px; text-align: left; font-size: 0.85rem;">
+                        <i class="fas fa-chart-bar"></i> <strong>AI灾情识别简报：</strong> 北川老县城房屋倒塌率>90%，山体滑坡堵塞河道，形成堰塞湖；映秀镇G213国道彻底中断，震中通信全阻，无人机蜂群正携基站前往。下一组光学影像预计15分钟后获取。
+                    </div>
+                    <div style="margin-top: 12px; background:#0c0e16; border-radius: 28px; padding: 8px 12px; font-family: monospace;">
+                        🛰️ 卫星资源调度：高分三号、海丝一号、吉林一号星座协同成像 | 无人机中继通信已覆盖草坡乡
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-2col">
+            <div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-video"></i> 现场多源信号 · 全民视角</div>
+                    <div class="card-content">
+                        <div class="video-grid">
+                            <div class="video-card">
+                                <div class="video-thumb">
+                                    <img src="https://aka.doubaocdn.com/s/RCVp1w7hVn" alt="无人机实时">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div class="video-caption"><i class="fas fa-map-marker-alt"></i> 震中映秀镇上空 · 通信基站投放中</div>
+                            </div>
+                            <div class="video-card">
+                                <div class="video-thumb">
+                                    <img src="https://aka.doubaocdn.com/s/KLS11w7hVt" alt="市民直拍">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div class="video-caption">成都春熙路 · 人群迅速疏散 · 吊灯剧烈摇晃</div>
+                            </div>
+                            <div class="video-card">
+                                <div class="video-thumb">
+                                    <img src="https://aka.doubaocdn.com/s/xh201w7hW5" alt="路面开裂">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div class="video-caption">都江堰二环路 · 地震瞬间路面开裂影像</div>
+                            </div>
+                            <div class="video-card">
+                                <div class="video-thumb">
+                                    <img src="https://aka.doubaocdn.com/s/O8Fv1w7hWD" alt="学校疏散">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div class="video-caption">绵竹市某学校 · 3分钟内全员疏散至操场</div>
+                            </div>
+                        </div>
+                        <div class="badge-tech" style="margin-top: 16px; display: inline-block;"><i class="fas fa-check-circle"></i> 平台内容真实性核验 | AI视觉鉴真标签已启用</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-hand-holding-heart"></i> 全民互助 · 应急平台</div>
+                    <div class="card-content">
+                        <div class="help-row">
+                            <i class="fas fa-map-marked-alt"></i> <strong>高德地图 “震中救援地图”</strong> —— 已标注求助点74处，自动规划救援路线<br>
+                            <span style="font-size: 0.7rem;">⏱️ 更新于14:42 | 附近应急车辆动态调配中</span>
+                        </div>
+                        <div class="help-row">
+                            <i class="fab fa-alipay"></i> <strong>支付宝 · 紧急寻人平台</strong> 收录寻人/报平安信息 1,200+ 条，AI匹配亲属27对<br>
+                            <span style="font-size: 0.7rem;">🔗 已接入国家应急数据库</span>
+                        </div>
+                        <div class="rumor-box">
+                            <i class="fas fa-shield-alt"></i> <strong>谣言粉碎 · 实时鉴谣</strong><br>
+                            ❌ “成都主城区将发生更大余震” 为AI合成配音，已被标记辟谣。<br>
+                            ✅ 官方预警：余震衰减正常，请关注中国地震台网权威信息。
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-truck-fast"></i> 立体救援 · 力量投送</div>
+                    <div class="card-content">
+                        <div class="tech-list">
+                            <div class="tech-item">
+                                <div class="tech-icon"><i class="fas fa-helicopter"></i></div>
+                                <div><strong>陆航突击</strong><br>西部战区4架米-171直升机已飞抵映秀上空，机降侦察</div>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon"><i class="fas fa-users"></i></div>
+                                <div><strong>国家救援队</strong><br>中国国际救援队 (CHN-1) 携破拆装备、搜救犬于15:10抵达邛崃机场</div>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon"><i class="fas fa-satellite-dish"></i></div>
+                                <div><strong>低轨通信网</strong><br>“星网”应急终端已空投震中，局部恢复短报文通信</div>
+                            </div>
+                        </div>
+                        <hr style="margin: 14px 0;">
+                        <div><i class="fas fa-microchip"></i> <strong>科技应急集群</strong> —— 工业无人机蜂群（40架）携带移动基站飞向草坡、耿达；翼龙-2H应急侦察机从贵州起飞，预计16:20抵达震区。</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-chart-line"></i> 地震参数 & 余震序列</div>
+                    <div class="card-content">
+                        <div>主震后2小时内记录到3.0级以上余震 23 次，最大余震 M5.2 (14:52 茂县)</div>
+                        <div style="background:#0e101a; border-radius: 24px; padding: 12px; margin-top: 12px; font-size:0.8rem;">
+                            <i class="fas fa-wave-square"></i> 震源机制: 逆冲型破裂 | 应力方向 NNW-SSE<br>
+                            <span class="badge-tech">中国地震局预测所: 震区近期发生更大地震可能性较低，注意强有感余震</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-globe"></i> 国际响应</div>
+                    <div class="card-content">
+                        联合国秘书长古特雷斯发表声明哀悼，俄罗斯、日本、新加坡表示愿派遣救援队。<br>
+                        外交部回应：“感谢国际社会关切，中方正科学统筹，将适时对外通报。”
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 8px;">
+            <div class="card-header"><i class="fas fa-newspaper"></i> 滚动更新 · 分钟级追踪</div>
+            <div class="card-content" style="display: flex; flex-direction: column; gap: 12px;">
+                <div><i class="fas fa-clock"></i> 15:02 · 成都双流机场部分航线恢复，优先保障救援航班</div>
+                <div><i class="fas fa-clock"></i> 15:08 · 汶川水磨镇通过卫星电话首次联系，报告房屋倒塌严重，急需专业医疗</div>
+                <div><i class="fas fa-clock"></i> 15:12 · 国家卫健委调派13支国家紧急医学救援队赶赴四川</div>
+                <div><i class="fas fa-clock"></i> 15:18 · 高分卫星红外数据出炉：震区热力图识别出42处疑似坍塌聚集区</div>
+                <div><i class="fas fa-microphone-alt"></i> <strong>直播速递：</strong> 本台记者已随武警先遣队抵达草坡乡，即将带来现场独家画面。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 灾情地图页面 -->
+    <div class="page-section" id="page-map">
+        <div class="card">
+            <div class="card-header" style="padding:0 0 12px;"><i class="fas fa-map"></i> 实时灾情地图 · 2026.05.12 15:20</div>
+            <div class="map-container">
+                <div class="img-placeholder">
+                    <img class="map-img" src="https://aka.doubaocdn.com/s/AB3o1w7hgt" alt="震区热力地图">
+                </div>
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-dot dot-red"></span> 失联/紧急求助</div>
+                    <div class="legend-item"><span class="legend-dot dot-yellow"></span> 待救援</div>
+                    <div class="legend-item"><span class="legend-dot dot-green"></span> 已获救/平安</div>
+                    <div class="legend-item"><span class="legend-dot dot-blue"></span> 救援力量</div>
+                </div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-item"><div class="stat-value">74</div><div class="stat-label">求助点</div></div>
+                <div class="stat-item"><div class="stat-value">27</div><div class="stat-label">救援点</div></div>
+                <div class="stat-item"><div class="stat-value">12</div><div class="stat-label">堰塞湖预警</div></div>
+                <div class="stat-item"><div class="stat-value">92%</div><div class="stat-label">卫星覆盖</div></div>
+            </div>
+            <div style="margin-top:16px;background:#0e101a;border-radius:20px;padding:14px;">
+                <i class="fas fa-robot"></i> <strong>AI灾情研判：</strong> 已识别出42处疑似坍塌聚集区，自动规划救援路线，优先保障北川、映秀方向，无人机已按路线投送物资。
+            </div>
+        </div>
+    </div>
+
+    <!-- 求助入口页面 -->
+    <div class="page-section" id="page-help">
+        <div class="card">
+            <div class="card-header" style="padding:0 0 12px;"><i class="fas fa-hand-holding-heart"></i> 紧急求助 · 一键提交</div>
+            <div class="options-row">
+                <div class="option-btn"><i class="fas fa-sos"></i> 我要求助</div>
+                <div class="option-btn"><i class="fas fa-check-circle"></i> 我要报平安</div>
+                <div class="option-btn"><i class="fas fa-search"></i> 我要寻人</div>
+                <div class="option-btn"><i class="fas fa-truck"></i> 我要捐赠</div>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label>你的姓名</label>
+                    <input type="text" placeholder="请填写你的姓名">
+                </div>
+                <div class="form-group">
+                    <label>联系电话</label>
+                    <input type="tel" placeholder="请填写你的联系电话，卫星电话也可">
+                </div>
+                <div class="form-group">
+                    <label>所在位置</label>
+                    <input type="text" placeholder="请填写你的位置，比如：汶川县映秀镇XX村">
+                </div>
+                <div class="form-group">
+                    <label>人数 & 伤情</label>
+                    <select>
+                        <option>1人，无伤情</option>
+                        <option>2-3人，无伤情</option>
+                        <option>多人，有轻微受伤</option>
+                        <option>多人，有重伤，急需医疗</option>
+                        <option>有老人/小孩，急需食物水</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>具体情况</label>
+                    <textarea rows="4" placeholder="请描述你的具体情况，比如房屋是否倒塌，有没有通信信号等"></textarea>
+                </div>
+                <button class="submit-btn">提交求助 · 已接入国家应急数据库</button>
+            </form>
+            <div style="margin-top:16px;background:#0e101a;border-radius:20px;padding:14px;font-size:0.8rem;">
+                <i class="fas fa-info-circle"></i> 提交后，你的位置会自动同步给救援队伍，AI会优先为你规划救援路线，卫星通信终端会优先投送到你所在的区域。
+            </div>
+        </div>
+    </div>
+
+    <!-- 数据简报页面 -->
+    <div class="page-section" id="page-data">
+        <div class="card">
+            <div class="card-header" style="padding:0 0 12px;"><i class="fas fa-chart-bar"></i> 救援数据简报 · 震后1小时</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title"><i class="fas fa-users"></i> 救援力量已抵达</div>
+                    <div class="stat-value">3500人</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
+                    <div style="font-size:0.8rem;color:#9ca3af;">目标：10000人，预计12小时内全部到位</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title"><i class="fas fa-wave-square"></i> 余震统计</div>
+                    <div class="stat-value">23次</div>
+                    <div style="font-size:0.8rem;color:#9ca3af;">3.0级以上，最大M5.2，余震衰减正常</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title"><i class="fas fa-box"></i> 物资投送</div>
+                    <div class="stat-value">120吨</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:24%"></div></div>
+                    <div style="font-size:0.8rem;color:#9ca3af;">水、食物、药品，优先保障震中</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title"><i class="fas fa-satellite"></i> 卫星覆盖</div>
+                    <div class="stat-value">92%</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+                    <div style="font-size:0.8rem;color:#9ca3af;">低轨卫星已覆盖大部分震区，剩余8%正在投送基站</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" style="padding:0 0 12px;"><i class="fas fa-clock"></i> 余震序列 · 实时记录</div>
+            <div>
+                <div class="list-item"><span><i class="fas fa-wave-square"></i>14:28:04</span><span>M8.0 主震</span></div>
+                <div class="list-item"><span><i class="fas fa-wave-square"></i>14:32:12</span><span>M4.2 余震</span></div>
+                <div class="list-item"><span><i class="fas fa-wave-square"></i>14:35:47</span><span>M3.8 余震</span></div>
+                <div class="list-item"><span><i class="fas fa-wave-square"></i>14:41:03</span><span>M5.2 最大余震</span></div>
+                <div class="list-item"><span><i class="fas fa-wave-square"></i>14:48:22</span><span>M3.5 余震</span></div>
+                <div class="list-item"><span><i class="fas fa-wave-square"></i>14:52:18</span><span>M4.7 余震</span></div>
+                <div class="list-item"><span><i class="fas fa-wave-square"></i>15:01:05</span><span>M3.1 余震</span></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" style="padding:0 0 12px;"><i class="fas fa-map-marker-alt"></i> 救援力量分布</div>
+            <div>
+                <div class="list-item"><span><i class="fas fa-map-marker-alt"></i>映秀镇</span><span>武警先遣队 120人</span></div>
+                <div class="list-item"><span><i class="fas fa-map-marker-alt"></i>都江堰</span><span>消防救援 1500人</span></div>
+                <div class="list-item"><span><i class="fas fa-map-marker-alt"></i>绵竹</span><span>国家救援队 300人</span></div>
+                <div class="list-item"><span><i class="fas fa-map-marker-alt"></i>茂县</span><span>陆航直升机 4架</span></div>
+                <div class="list-item"><span><i class="fas fa-map-marker-alt"></i>彭州</span><span>无人机蜂群 40架</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 辟谣专窗页面 -->
+    <div class="page-section" id="page-rumor">
+        <div class="card">
+            <div class="card-header" style="padding:0 0 12px;"><i class="fas fa-user-shield"></i> 谣言粉碎 · 权威辟谣</div>
+            <div class="rumor-item">
+                <div class="rumor-title">❌ 谣言：成都主城区将发生更大余震，大家赶紧撤离</div>
+                <div class="rumor-fact">✅ 事实：AI合成配音，已被平台标记，余震衰减正常，无更大地震风险</div>
+                <span class="badge-ai"><i class="fas fa-robot"></i> AI鉴真：100% 虚假内容</span>
+                <button class="report-btn">举报谣言</button>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="rumor-item">
+                <div class="rumor-title">❌ 谣言：汶川地震是人为的，是水库诱发的</div>
+                <div class="rumor-fact">✅ 事实：龙门山断裂带自然地震，与水库无关，地震局已辟谣</div>
+                <span class="badge-ai"><i class="fas fa-robot"></i> AI鉴真：99% 虚假内容</span>
+                <button class="report-btn">举报谣言</button>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="rumor-item">
+                <div class="rumor-title">❌ 谣言：救援队已经放弃北川了，没人管我们</div>
+                <div class="rumor-fact">✅ 事实：国家救援队已经出发，预计1小时内抵达，正在打通道路</div>
+                <span class="badge-ai"><i class="fas fa-robot"></i> AI鉴真：98% 虚假内容</span>
+                <button class="report-btn">举报谣言</button>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="rumor-item">
+                <div class="rumor-title">❌ 谣言：有不明病毒在震区传播，大家不要去</div>
+                <div class="rumor-fact">✅ 事实：无病毒传播，疾控中心已抵达，正在做防疫工作</div>
+                <span class="badge-ai"><i class="fas fa-robot"></i> AI鉴真：99% 虚假内容</span>
+                <button class="report-btn">举报谣言</button>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="rumor-item">
+                <div class="rumor-title">❌ 谣言：AI合成遇难者声音，用来骗捐款</div>
+                <div class="rumor-fact">✅ 事实：平台已拦截，所有捐款都走官方渠道，公开透明</div>
+                <span class="badge-ai"><i class="fas fa-robot"></i> AI鉴真：100% 虚假内容</span>
+                <button class="report-btn">举报谣言</button>
+                <div style="clear:both;"></div>
+            </div>
+            <div style="margin-top:16px;background:#0e101a;border-radius:20px;padding:14px;">
+                <i class="fas fa-info-circle"></i> <strong>平台机制：</strong> 所有内容都经过AI视觉鉴真，虚假内容会被自动标记，同时有志愿者团队人工核实，如果你看到可疑内容，欢迎举报。
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item nav-active" onclick="switchPage('live')"><i class="fas fa-tv"></i> 直播</div>
+        <div class="nav-item" onclick="switchPage('map')"><i class="fas fa-map"></i> 灾情地图</div>
+        <div class="nav-item" onclick="switchPage('help')"><i class="fas fa-hand-holding-heart"></i> 求助入口</div>
+        <div class="nav-item" onclick="switchPage('data')"><i class="fas fa-chart-bar"></i> 数据简报</div>
+        <div class="nav-item" onclick="switchPage('rumor')"><i class="fas fa-user-shield"></i> 辟谣专窗</div>
+    </div>
+    <footer>
+        © 前沿融媒·应急报道 ｜ 数据基于国家地震台网、应急管理部实时信息整合 ｜ 请以官方通报为准 ｜ 守望相助，共渡难关
+    </footer>
+</div>
+<script>
+    function switchPage(pageName) {
+        // 隐藏所有页面
+        document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+        // 显示目标页面
+        document.getElementById('page-' + pageName).classList.add('active');
+        // 切换导航的激活状态
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(el => el.classList.remove('nav-active'));
+        event.target.closest('.nav-item').classList.add('nav-active');
+        // 滚动到顶部
+        window.scrollTo(0,0);
+    }
+    const updates = [
+        "【最新】应急管理部: 已调派3500名消防救援人员奔赴汶川 · 翼龙无人机已与震中建立图像链路",
+        "【快讯】阿坝州政府: 震中部分村落失联，正利用低轨卫星逐个呼叫",
+        "【科技速报】自动地震预警系统在成都触发后，覆盖人群达2100万"
+    ];
+    let idx = 0;
+    setInterval(() => {
+        const tickerSpan = document.getElementById('breakingText');
+        if(tickerSpan) {
+            tickerSpan.innerHTML = updates[idx % updates.length] + " · 持续更新中 ";
+            idx++;
+        }
+    }, 8000);
+    setInterval(() => {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('zh-CN', { hour12: false });
+        const timeEl = document.getElementById('liveTime');
+        if(timeEl) timeEl.innerHTML = `<i class="far fa-clock"></i> ${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${timeStr} (UTC+8) · 震后实时`;
+    }, 1000);
+</script>
+</body>
+</html>
